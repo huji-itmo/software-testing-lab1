@@ -5,6 +5,15 @@ import org.junit.jupiter.api.Assertions.*
 
 class DomainModelTest {
 
+    // "В полной темноте"
+    @Test
+    fun testDarknessIsComplete() {
+        val darkness = Darkness()
+        assertTrue(darkness.isComplete)
+        assertEquals(0.0, darkness.lightLevel, 0.001)
+    }
+
+    // "сверкнула ослепительно яркая точка света"
     @Test
     fun testLightPointCreation() {
         val lightPoint = LightPoint()
@@ -12,6 +21,7 @@ class DomainModelTest {
         assertEquals(Brightness.BLINDING, lightPoint.brightness)
     }
 
+    // "Она начала расползаться в стороны, превращаясь в узкий полумесяц"
     @Test
     fun testLightPointTransformsToCrescent() {
         val lightPoint = LightPoint()
@@ -20,6 +30,7 @@ class DomainModelTest {
         assertTrue(crescent.isNarrow)
     }
 
+    // "через несколько секунд показались два солнца"
     @Test
     fun testCrescentExpandsToTwoSuns() {
         val crescent = Crescent()
@@ -28,6 +39,7 @@ class DomainModelTest {
         assertTrue(celestialBodies.all { it is Sun })
     }
 
+    // "огненные светила, сжигающие белым пламенем"
     @Test
     fun testSunProperties() {
         val sun = Sun()
@@ -37,12 +49,14 @@ class DomainModelTest {
         assertEquals("white", sun.color)
     }
 
+    // "огненные светила" (температура звезды)
     @Test
     fun testSunTemperature() {
         val sun = Sun(temperature = 6000.0)
         assertEquals(6000.0, sun.temperature, 0.1)
     }
 
+    // "черный край горизонта"
     @Test
     fun testHorizonIsBlack() {
         val horizon = Horizon()
@@ -50,6 +64,7 @@ class DomainModelTest {
         assertEquals("black", horizon.color)
     }
 
+    // "разреженную атмосферу"
     @Test
     fun testAtmosphereIsRarefied() {
         val atmosphere = Atmosphere()
@@ -57,6 +72,7 @@ class DomainModelTest {
         assertTrue(atmosphere.density < 1.0)
     }
 
+    // "струились сквозь разреженную атмосферу" (успешное прохождение)
     @Test
     fun testSolarFlareFlowsThroughAtmosphere() {
         val atmosphere = Atmosphere(density = 0.3, isRarefied = true)
@@ -64,6 +80,7 @@ class DomainModelTest {
         assertTrue(flare.flowThrough(atmosphere))
     }
 
+    // "струились сквозь разреженную атмосферу" (плотная атмосфера - не проходит)
     @Test
     fun testSolarFlareDoesNotFlowThroughDenseAtmosphere() {
         val atmosphere = Atmosphere(density = 2.0, isRarefied = false)
@@ -71,13 +88,7 @@ class DomainModelTest {
         assertFalse(flare.flowThrough(atmosphere))
     }
 
-    @Test
-    fun testDarknessIsComplete() {
-        val darkness = Darkness()
-        assertTrue(darkness.isComplete)
-        assertEquals(0.0, darkness.lightLevel, 0.001)
-    }
-
+    // "показались два солнца" (типы небесных тел)
     @Test
     fun testCelestialBodyTypes() {
         val star = CelestialBody("Star", CelestialBodyType.STAR, 5000.0, "yellow")
@@ -89,12 +100,14 @@ class DomainModelTest {
         assertEquals(CelestialBodyType.PLANET, planet.type)
     }
 
+    // "белым пламенем"
     @Test
     fun testFlameTypes() {
         val whiteFlame = Sun().getFlameType()
         assertEquals(FlameType.WHITE, whiteFlame)
     }
 
+    // "струились сквозь разреженную атмосферу"
     @Test
     fun testAtmosphereAllowsFlow() {
         val atmosphere = Atmosphere(isRarefied = true)
@@ -102,18 +115,21 @@ class DomainModelTest {
         assertTrue(atmosphere.allowsFlow(flare))
     }
 
+    // "Яркие цветные сполохи"
     @Test
     fun testSolarFlareColorIsColorful() {
         val flare = SolarFlare()
         assertEquals("colorful", flare.color)
     }
 
+    // "разреженную атмосферу" (состав атмосферы)
     @Test
     fun testAtmosphereComposition() {
         val atmosphere = Atmosphere(composition = "thin")
         assertEquals("thin", atmosphere.composition)
     }
 
+    // "показались два солнца" (два отдельных солнца)
     @Test
     fun testMultipleSuns() {
         val crescent = Crescent()
@@ -127,6 +143,7 @@ class DomainModelTest {
         assertTrue(sun2.isBurning())
     }
 
+    // вся модель
     @Test
     fun testDomainModelFromText() {
         val darkness = Darkness(isComplete = true, lightLevel = 0.0)

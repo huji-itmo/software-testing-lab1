@@ -9,3 +9,10 @@ plugins {
 dependencies {
     api(project(":dijkstra"))
 }
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}

@@ -5,3 +5,10 @@
 plugins {
     id("buildlogic.kotlin-library-conventions")
 }
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
