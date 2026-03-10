@@ -3,12 +3,9 @@
  */
 package org.example.app
 
-import org.example.utilities.StringUtils
-
-import org.apache.commons.text.WordUtils
-
 fun main() {
-    val tokens = StringUtils.split(MessageUtils.getMessage())
-    val result = StringUtils.join(tokens)
-    println(WordUtils.capitalize(result))
+    println("Arctg(0) = ${ArctanKt.arctg(0.0)}")
+    println("Arctg(1) = ${ArctanKt.arctg(1.0)}")
+    println("Arctg(-1) = ${ArctanKt.arctg(-1.0)}")
+    println("Arctg(0.5) = ${ArctanKt.arctg(0.5)}")
 }
